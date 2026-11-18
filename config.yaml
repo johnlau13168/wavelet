@@ -1,0 +1,52 @@
+paths:
+  csv_dir: "test_csv"
+  file_7226: "7226_1m.csv"
+  file_7552: "7552_1m.csv"
+  log_dir: "logs"
+  log_filename: "trade_log_fuzzified_wavelet.txt"
+
+account_and_execution:
+  initial_cash: 50000.0
+  board_size: 100
+  min_order_val: 20000.0      # Lower to 10000.0 if testing initial_cash: 30000.0
+  max_total_orders: 190
+  commission_free: true
+  platform_fee: 15.0
+  spread_ticks: 1             # 0 = idealized open fill, 1 = realistic 1-tick HKEX spread, 2 = heavy stress
+
+strategy_core:
+  start_bar: 522
+  lookback_window: 384
+  wavelet_name: "db4"
+  wavelet_level: 4
+  slope_ewm_span: 10
+  cool_down_bars: 32
+  max_hold_days: 24
+
+allocation_and_risk:
+  base_cash_pct: 0.41
+  max_cash_pct: 0.58
+  dd_ceiling_boost: 0.16
+  dd_center: 0.08
+  dd_steepness: 45.0
+  vol_safe_center: 1.45
+  vol_safe_steepness: 12.0
+  vol_window: 40
+  base_vol_window: 120
+  default_sl_mult: 2.50
+  default_tp_mult: 3.88
+  sl_base: 2.45
+  sl_vol_scale: 0.15
+  tp_base: 3.83
+  tp_weight_scale: 0.08
+
+fuzzy_membership:
+  slope_center: 0.020
+  d3_center: 0.030
+  slope_steepness: 95.0
+  d3_steepness: 55.0
+  exhaust_center_mult: 45.0
+  exhaust_steepness: 4.0
+  min_conviction: 0.50
+  payoff_center: 0.58
+  payoff_steepness: 7.5
