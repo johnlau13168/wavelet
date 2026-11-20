@@ -335,7 +335,8 @@ class FuzzifiedWaveletAlphaEngine:
             f"  -> Computing rolling db4 level-4 wavelet decomposition (Lookback = {self.LOOKBACK} bars, Mode = symmetric)...")
         for i in range(self.LOOKBACK, len(df)):
             window = close_7226[i - self.LOOKBACK + 1: i + 1]
-            cA4, cD4, cD3, cD2, cD1 = pywt.wavedec(window, "db4", level=4, mode="symmetric")
+            writable_window = np.ascontiguousarray(window, dtype=np.float64)
+            cA4, cD4, cD3, cD2, cD1 = pywt.wavedec(writable_window, "db4", level=4, mode="symmetric")
             s4_trend[i] = float(cA4[-1])
             d3_cyclical[i] = float(cD3[-1])
 
